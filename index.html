@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <section>
+        <h3>Drinking age</h3>
+        <div>
+            <label for="age">Enter your age:</label>
+            <input type="number" name="" id="age">
+            <input onclick="checkAge('age')" type="button" value="Submit">
+        </div>
+        <div>
+            <label id="verdict"></label>
+        </div>
+    </section>
+    <section>
+        <h3>Light</h3>
+        <input type="checkbox" id="lightSwitch">
+        <label for="lightSwitch">Click to toggle light.</label>
+        <lightbulb></lightbulb>
+    </section>
+
+    <section>
+        <h3>Photo</h3>
+        <input type="checkbox" id="photToggle">
+        <label for="photToggle">Click to show/hide photo.</label>
+        <img id="photo" src="./images/rocks.png" alt="">
+    </section>
+    <script>
+        function byID(ID) {
+            return document.getElementById(ID);
+        }
+
+        byID('photToggle').onclick = function () {
+            byID("photo").classList.toggle('invisible');
+        }
+
+        function checkAge(fieldID) {
+            let ageField = byID(fieldID);
+            if (ageField.value != '') {
+                let value = Number.parseFloat(ageField.value);
+                let verdict = byID("verdict");
+                verdict.innerText = value < 18 ? "You are too young." : "You may kiil your liver.";
+            } else {
+                alert("Enter age.");
+            }
+        }
+
+        byID("lightSwitch").onclick = function () {
+            let bulbs = document.getElementsByTagName('lightbulb');
+            Array.from(bulbs).forEach(bulb => {
+                bulb.classList.toggle("on");
+            });
+        }
+    </script>
+</body>
+
+</html>
